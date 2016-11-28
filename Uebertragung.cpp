@@ -3,7 +3,7 @@
 Uebertragung::Uebertragung(string dateinam, string peeri, int verbindung) {
     dateiname = dateinam;
     string da = "data/" + dateinam;
-    dateihandler = new fstream{da, ios_base::in | ios_base::ate};
+    dateihandler = new fstream{da, ios_base::in | ios_base::ate | ios_base::binary};
     peerip = peeri;
     dateihandler->seekg(0, ios_base::end);
     long dateigroes = dateihandler->tellg();
@@ -18,7 +18,7 @@ Uebertragung::Uebertragung(string dateinam, string peeri, int verbindung) {
 Uebertragung::Uebertragung(string dateinam, string peeri, long dateigroes, int verbindung) {
     dateiname = dateinam;
     string da = "data/" + dateinam;
-    dateihandler = new fstream{da, ios_base::out | ios_base::trunc};
+    dateihandler = new fstream{da, ios_base::out | ios_base::trunc | ios_base::binary};
     peerip = peeri;
     dateigroese = dateigroes;
     dateiposition = 0;
@@ -30,7 +30,8 @@ Uebertragung::Uebertragung(string dateinam, string peeri, long dateigroes, int v
 Uebertragung::Uebertragung(string dateinam, string peeri, long dateigroes, long dateipositio, int senden, int verbindung) {
     dateiname = dateinam;
     string da = "data/" + dateinam;
-    dateihandler = new fstream{da, ios_base::in | ios_base::out | ios_base::ate};
+    dateihandler = new fstream{da, ios_base::in | ios_base::out | ios_base::ate | ios_base::binary};
+    dateihandler->seekg(dateipositio, ios_base::beg);
     peerip = peeri;
     dateigroese = dateigroes;
     dateiposition = dateipositio;
